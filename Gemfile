@@ -24,17 +24,17 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # authentication
-gem 'devise'
+gem 'devise', '~> 3.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
   gem 'factory_girl_rails'
   gem 'ffaker'
 end
 
 group :test do
+  gem 'shoulda-matchers', require: false
   gem 'rspec-rails', '~> 2.14'
 end
 
