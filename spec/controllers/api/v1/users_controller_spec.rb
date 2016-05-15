@@ -7,7 +7,7 @@ describe Api::V1::UsersController do
   describe "GET #show" do
     before(:each) do
       @user = FactoryGirl.create :user
-      #get :show, id: @user.id, format: :json
+      get :show, id: @user.id, format: :json
     end
 
     it "returns the information about a reporter on hash" do
