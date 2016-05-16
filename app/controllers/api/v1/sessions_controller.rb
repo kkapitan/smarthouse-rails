@@ -14,4 +14,10 @@ class Api::V1::SessionsController < ApplicationController
       render template: "/api/v1/sessions/errors.json.jbuilder", status: 422
     end
   end
+
+  def destroy
+    current_user.generate_authentication_token!
+    current_user.save
+    head 204
+  end
 end

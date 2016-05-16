@@ -34,4 +34,14 @@ describe Api::V1::SessionsController do
       it { should respond_with 422 }
     end
   end
+
+  describe "DELETE #destroy" do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      request.headers["Authorization"] = @user.auth_token
+      delete :destroy
+    end
+
+    it { should respond_with 204 }
+  end
 end
