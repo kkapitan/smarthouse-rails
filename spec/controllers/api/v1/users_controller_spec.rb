@@ -7,7 +7,7 @@ describe Api::V1::UsersController do
   describe "GET #show" do
     before(:each) do
       @user = FactoryGirl.create :user
-      get :show, id: @user.id, format: :json
+      get :show, id: @user.id
     end
 
     it "returns the information about a reporter on hash" do
@@ -23,7 +23,7 @@ describe Api::V1::UsersController do
     context "When request results in success" do
       before(:each) do
         @user_attributes = FactoryGirl.attributes_for :user
-        post :create, user: @user_attributes, format: :json
+        post :create, user: @user_attributes
       end
 
       it "returns the information about created object" do
@@ -40,7 +40,7 @@ describe Api::V1::UsersController do
         @invalid_user_attributes = FactoryGirl.attributes_for :user
         @invalid_user_attributes[:email] = "invalid.email"
 
-        post :create, user: @invalid_user_attributes, format: :json
+        post :create, user: @invalid_user_attributes
       end
 
       it "returns information about errors" do
