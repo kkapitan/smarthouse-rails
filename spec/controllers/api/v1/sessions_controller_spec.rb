@@ -24,7 +24,6 @@ describe Api::V1::SessionsController do
       before(:each) do
         credentials = { email: @user.email, password: "wrongpassword" }
         post :create, { session: credentials}
-        print json_response
       end
 
       it "renders errors json" do
