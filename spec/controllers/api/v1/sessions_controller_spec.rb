@@ -37,7 +37,7 @@ describe Api::V1::SessionsController do
   describe "DELETE #destroy" do
     before(:each) do
       @user = FactoryGirl.create :user
-      request.headers["Authorization"] = @user.auth_token
+      api_authorization_header(@user.auth_token)
       delete :destroy
     end
 
