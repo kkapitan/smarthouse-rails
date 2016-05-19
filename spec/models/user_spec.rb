@@ -18,6 +18,8 @@ describe User do
   it { should validate_confirmation_of(:password) }
   it { should allow_value('example@domain.com').for(:email) }
 
+  it { should have_many :actions }
+
   describe "#generate_authentication_token!" do
     it "generates a unique token" do
       Devise.stub(:friendly_token).and_return("uniquetoken123")
