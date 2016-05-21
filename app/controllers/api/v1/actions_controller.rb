@@ -1,5 +1,5 @@
 class Api::V1::ActionsController < ApplicationController
-  before_action :authenticate_with_token!, :only => [:index]
+  before_action :authenticate_with_token!, :only => [:index, :create]
 
   def index
     @actions = current_user.actions
