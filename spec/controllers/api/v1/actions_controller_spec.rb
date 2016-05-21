@@ -37,7 +37,7 @@ describe Api::V1::ActionsController do
         @action = FactoryGirl.create :action
         @action_attributes = { action_subject_id: @action.action_subject_id }
 
-        post :create, user_action: @action_attributes
+        post :create, @action_attributes
       end
 
       it "renders json with information about created action" do
@@ -52,7 +52,7 @@ describe Api::V1::ActionsController do
       before(:each) do
         @action_attributes = { action_subject_id: 11000}
 
-        post :create, user_action: @action_attributes
+        post :create, @action_attributes
       end
 
       it "renders json with errors" do

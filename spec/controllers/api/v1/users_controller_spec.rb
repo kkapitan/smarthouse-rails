@@ -23,7 +23,7 @@ describe Api::V1::UsersController do
     context "When request results in success" do
       before(:each) do
         @user_attributes = FactoryGirl.attributes_for :user
-        post :create, user: @user_attributes
+        post :create, @user_attributes
       end
 
       it "returns the information about created object" do
@@ -40,7 +40,7 @@ describe Api::V1::UsersController do
         @invalid_user_attributes = FactoryGirl.attributes_for :user
         @invalid_user_attributes[:email] = "invalid.email"
 
-        post :create, user: @invalid_user_attributes
+        post :create, @invalid_user_attributes
       end
 
       it "returns information about errors" do

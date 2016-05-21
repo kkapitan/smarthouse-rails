@@ -18,6 +18,6 @@ class Api::V1::ActionsController < ApplicationController
 
   private
     def action_params
-      params.require(:user_action).permit(:action_subject_id)
+      params.permit(:action_subject_id)
     end
 end
