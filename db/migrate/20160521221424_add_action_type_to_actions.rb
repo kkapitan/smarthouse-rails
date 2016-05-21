@@ -1,0 +1,5 @@
+class AddActionTypeToActions < ActiveRecord::Migration
+  def change
+    add_column :actions, :action_type, :integer, default: 0, null: false
+  end
+end

@@ -23,6 +23,6 @@ class Api::V1::ActionsController < ApplicationController
 
   private
     def action_params
-      params.permit(:action_subject_id)
+      params.permit(:action_subject_id, :action_type)
     end
 end

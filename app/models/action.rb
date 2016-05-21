@@ -4,4 +4,9 @@ class Action < ActiveRecord::Base
 
   validates :user, presence: true
   validates :action_subject, presence: true
+
+  validates :action_type, presence: true
+
+  enum action_type: [:switch, :timer, :beacon]
+
 end
