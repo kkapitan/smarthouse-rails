@@ -1,4 +1,3 @@
 json.action_subjects @subjects do |subject|
-  json.id subject.id
-  json.name subject.name
+  json.partial! '/api/v1/shared/action_subject', subject: subject
 end

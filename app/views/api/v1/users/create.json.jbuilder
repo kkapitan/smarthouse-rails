@@ -1,5 +1,3 @@
 json.user do
-  json.id @user.id
-  json.email @user.email
-  json.auth_token @user.auth_token
+  json.partial! '/api/v1/shared/user_with_token', user: @user
 end
