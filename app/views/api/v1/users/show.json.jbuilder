@@ -1,1 +1,4 @@
-json.(@user, :id, :email)
+json.user do
+  json.id @user.id
+  json.email @user.email
+end

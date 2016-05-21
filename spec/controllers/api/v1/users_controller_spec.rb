@@ -11,7 +11,7 @@ describe Api::V1::UsersController do
     end
 
     it "returns the information about a reporter on hash" do
-      user_response = json_response
+      user_response = json_response[:user]
       expect(user_response[:email]).to eql @user.email
     end
 
@@ -27,7 +27,7 @@ describe Api::V1::UsersController do
       end
 
       it "returns the information about created object" do
-        user_response = json_response
+        user_response = json_response[:user]
         expect(user_response[:email]).to eql @user_attributes[:email]
       end
 
