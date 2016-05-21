@@ -64,5 +64,18 @@ describe Api::V1::ActionsController do
 
   end
 
+  describe "DELETE #action" do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      api_authorization_header(@user.auth_token)
+
+      @action = FactoryGirl.create :action, user: @user
+      delete :destroy, id: @action.id
+    end
+
+    it { should respond_with 204 }
+  end
+
+
 
 end

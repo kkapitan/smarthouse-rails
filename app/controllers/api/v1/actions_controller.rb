@@ -1,5 +1,5 @@
 class Api::V1::ActionsController < ApplicationController
-  before_action :authenticate_with_token!, :only => [:index, :create]
+  before_action :authenticate_with_token!, :only => [:index, :create, :destroy]
 
   def index
     @actions = current_user.actions
@@ -14,6 +14,11 @@ class Api::V1::ActionsController < ApplicationController
     else
       render :template =>"/api/v1/actions/errors.json.jbuilder", :status => 422, :formats => [:json]
     end
+  end
+
+  def destroy
+    current_user.actions.find_by(params[:id]).destroy
+    head 204
   end
 
   private
