@@ -27,7 +27,7 @@ describe Api::V1::SessionsController do
       end
 
       it "renders errors json" do
-        expect(json_response).to have_key(:errors)
+        expect(json_response[:errors]).not_to eql nil
       end
 
       it { should respond_with 422 }

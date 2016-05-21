@@ -44,8 +44,7 @@ describe Api::V1::UsersController do
       end
 
       it "returns information about errors" do
-        user_response = json_response
-        expect(user_response).to have_key(:errors)
+        expect(json_response[:errors]).not_to eql nil
       end
 
       it { should respond_with 422 }
