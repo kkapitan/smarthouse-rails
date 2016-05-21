@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :action do
-    user nil
-    action_subject nil
+    user
+    action_subject
   end
 end
