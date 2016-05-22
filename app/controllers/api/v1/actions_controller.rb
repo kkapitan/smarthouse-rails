@@ -3,6 +3,7 @@ class Api::V1::ActionsController < ApplicationController
 
   def index
     @actions = current_user.actions
+    @action_types = Action.action_types
 
     render '/api/v1/actions/index.json.jbuilder'
   end

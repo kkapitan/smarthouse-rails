@@ -27,6 +27,11 @@ describe Api::V1::ActionsController do
       expect(actions_response[1][:id]).to eql @action2.id
     end
 
+    it "responds with json containig list of available action_types" do
+      action_types_response = json_response[:action_types]
+      expect(action_types_response.count).to eql Action.action_types.count
+    end
+
     it { should respond_with 200 }
   end
 
