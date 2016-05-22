@@ -13,23 +13,36 @@ describe Api::V1::ActionsController do
 
       @action1 = FactoryGirl.create :action, user: @user
       @action2 = FactoryGirl.create :action, user: @user
-      @action3 = FactoryGirl.create :action, user: @user2
+      @action3 = FactoryGirl.create :action, user: @user,  action_type: "timer"
+      @action4 = FactoryGirl.create :action, user: @user2
 
       get :index
     end
 
 
-    it "responds with json containing list of actions for current user" do
-      actions_response = json_response[:actions]
+    it "responds with json containing list of actions for current user divided by section" do
+      sections_response = json_response[:sections]
 
-      expect(actions_response.count).to eql 2
-      expect(actions_response[0][:id]).to eql @action1.id
-      expect(actions_response[1][:id]).to eql @action2.id
+      switch_actions_response = sections_response[0][:actions]
+
+      expect(switch_actions_response.count).to eql 2
+      expect(switch_actions_response[0][:id]).to eql @action1.id
+      expect(switch_actions_response[1][:id]).to eql @action2.id
+
+      timer_actions_response = sections_response[1][:actions]
+
+      expect(timer_actions_response.count).to eql 1
+      expect(timer_actions_response[0][:id]).to eql @action3.id
+
+      beacon_actions_response =sections_response[2][:actions]
+
+      expect(beacon_actions_response.count).to eql 0
     end
 
-    it "responds with json containig list of available action_types" do
-      action_types_response = json_response[:action_types]
-      expect(action_types_response.count).to eql Action.action_types.count
+    it "responds with json containing sections as action_types" do
+      sections_response = json_response[:sections]
+      expect(sections_response.count).to eql Action.action_types.count
+      expect(sections_response[0][:action_type][:id]).to eql 0
     end
 
     it { should respond_with 200 }
