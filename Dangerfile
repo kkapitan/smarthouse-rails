@@ -2,6 +2,9 @@
 # including in a project's CHANGELOG for example
 declared_trivial = pr_title.include? "#trivial"
 
+# Test
+warn("Danger has been run for this Pull Request :)")
+
 # Make it more obvious that a PR is a work in progress and shouldn't be merged yet
 warn("PR is classed as Work in Progress") if pr_title.include? "[WIP]"
 
