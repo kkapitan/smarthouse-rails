@@ -1,3 +1,7 @@
+json.beacons @beacons do |beacon|
+  json.partial! '/api/v1/shared/beacon', beacon: beacon
+end
+
 json.sections @action_types do |action_type|
 
   json.action_type do

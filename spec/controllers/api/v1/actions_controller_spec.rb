@@ -11,6 +11,9 @@ describe Api::V1::ActionsController do
 
       @user2 = FactoryGirl.create :user
 
+      @beacon1 = FactoryGirl.create :beacon
+      @beacon2 = FactoryGirl.create :beacon
+
       @action1 = FactoryGirl.create :action, user: @user
       @action2 = FactoryGirl.create :action, user: @user
       @action3 = FactoryGirl.create :action, user: @user,  action_type: "timer"
@@ -19,6 +22,12 @@ describe Api::V1::ActionsController do
       get :index
     end
 
+
+    it "responds with json containing list of beacons" do
+      beacons_response = json_response[:beacons]
+
+      expect(beacons_response.count).to eql 2
+    end
 
     it "responds with json containing list of actions for current user divided by section" do
       sections_response = json_response[:sections]
