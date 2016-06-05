@@ -23,7 +23,7 @@ class Admin::ActionSubjectsController < ApplicationController
 
   private
   def action_subject_params
-    params.require(:action_subject).permit(:name)
+    params.require(:action_subject).permit(:name, :configuration)
   end
 
 end

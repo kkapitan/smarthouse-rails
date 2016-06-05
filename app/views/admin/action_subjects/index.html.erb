@@ -4,7 +4,7 @@
 <ul class="users">
   <% @action_subjects.each do |as| %>
       <li>
-        <%= "#{as.name}" %>
+        <%= "#{as.name}   #{as.configuration}" %>
       </li>
   <% end %>
 </ul>

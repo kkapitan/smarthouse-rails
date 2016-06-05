@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   namespace :admin, path: '/' do
     resources :users
     resources :action_subjects
+    resources :beacons
   end
 
 end

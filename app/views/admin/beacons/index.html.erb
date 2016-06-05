@@ -1,0 +1,11 @@
+<h1>Beacons</h1>
+
+
+<%= link_to "Create new beacon", "/beacons/new", class: "btn btn-lg btn-primary" %>
+<ul class="users">
+  <% @beacons.each do |beacon| %>
+      <li>
+        <%= "#{beacon.name} #{beacon.major}" %>
+      </li>
+  <% end %>
+</ul>
