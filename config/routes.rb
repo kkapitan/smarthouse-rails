@@ -15,4 +15,9 @@ Rails.application.routes.draw do
       devise_for :users
     end
   end
+
+  namespace :admin, path: '/' do
+    resources :users
+  end
+
 end
