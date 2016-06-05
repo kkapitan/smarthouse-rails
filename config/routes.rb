@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   namespace :admin, path: '/' do
     resources :users
+    resources :action_subjects
   end
 
 end
