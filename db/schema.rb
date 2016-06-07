@@ -15,9 +15,10 @@ ActiveRecord::Schema.define(version: 20160606114516) do
 
   create_table "action_subjects", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "state",      default: 0, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "state",         default: 0, null: false
+    t.string   "configuration"
   end
 
   create_table "action_triggers", force: :cascade do |t|

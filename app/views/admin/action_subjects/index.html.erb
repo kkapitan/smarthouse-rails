@@ -1,0 +1,10 @@
+<h1>Action Subjects</h1>
+
+<%= link_to "Create new subject", "/action_subjects/new", class: "btn btn-lg btn-primary" %>
+<ul class="users">
+  <% @action_subjects.each do |as| %>
+      <li>
+        <%= "#{as.name}   #{as.configuration}" %>
+      </li>
+  <% end %>
+</ul>
