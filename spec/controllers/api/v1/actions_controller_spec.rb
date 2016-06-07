@@ -11,8 +11,8 @@ describe Api::V1::ActionsController do
 
       @user2 = FactoryGirl.create :user
 
-      @beacon1 = FactoryGirl.create :beacon
-      @beacon2 = FactoryGirl.create :beacon
+      @beacon1 = FactoryGirl.create :beacon, name: "b1"
+      @beacon2 = FactoryGirl.create :beacon, name: "b2"
 
       @action1 = FactoryGirl.create :action, user: @user
       @action2 = FactoryGirl.create :action, user: @user
@@ -62,9 +62,17 @@ describe Api::V1::ActionsController do
     context "When creating results in success" do
       before(:each) do
         @action = FactoryGirl.create :action
-        @action_attributes = { action_subject_id: @action.action_subject_id }
 
+        @trigger_attributes = FactoryGirl.attributes_for :action_trigger
+        @trigger_attributes[:trigger_type] = "weekly_timer"
+
+        @action_attributes = { action_subject_id: @action.action_subject_id, trigger: @trigger_attributes }
         post :create, @action_attributes
+      end
+
+      it "renders json with information about action trigger" do
+        trigger_response = json_response[:action][:trigger]
+        expect(trigger_response[:type]).to eql ActionTrigger.trigger_types["weekly_timer"]
       end
 
       it "renders json with information about created action" do
@@ -77,8 +85,12 @@ describe Api::V1::ActionsController do
 
     context "When creating results in errors" do
       before(:each) do
-        @action_attributes = { action_subject_id: 11000}
+        @action_attributes = { action_subject_id: 11000 }
 
+        @trigger_attributes = FactoryGirl.attributes_for :action_trigger
+        @trigger_attributes[:trigger_type] = "weekly_timer"
+
+        @action_attributes = { action_subject_id: 11000, trigger: @trigger_attributes }
         post :create, @action_attributes
       end
 
