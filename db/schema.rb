@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160605193946) do
+ActiveRecord::Schema.define(version: 20160606114516) do
 
   create_table "action_subjects", force: :cascade do |t|
     t.string   "name"
@@ -21,15 +21,33 @@ ActiveRecord::Schema.define(version: 20160605193946) do
     t.string   "configuration"
   end
 
+  create_table "action_triggers", force: :cascade do |t|
+    t.integer  "weeks"
+    t.integer  "hours"
+    t.integer  "minutes"
+    t.integer  "day_hour"
+    t.integer  "start_hour"
+    t.integer  "finish_hour"
+    t.text     "week_days"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "trigger_type", default: 0, null: false
+    t.integer  "beacon_id"
+  end
+
+  add_index "action_triggers", ["beacon_id"], name: "index_action_triggers_on_beacon_id"
+
   create_table "actions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "action_subject_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "action_type",       default: 0, null: false
+    t.integer  "action_trigger_id"
   end
 
   add_index "actions", ["action_subject_id"], name: "index_actions_on_action_subject_id"
+  add_index "actions", ["action_trigger_id"], name: "index_actions_on_action_trigger_id"
   add_index "actions", ["user_id"], name: "index_actions_on_user_id"
 
   create_table "beacons", force: :cascade do |t|
