@@ -10,12 +10,18 @@ class Api::V1::ActionsController < ApplicationController
   end
 
   def create
-    @trigger = ActionTrigger.new(trigger_params)
+    new_trigger_params = trigger_params
+    new_trigger_params[:trigger_type] = ActionTrigger.trigger_types.to_a[trigger_params[:trigger_type].to_i].first
+
+    @trigger = ActionTrigger.new(new_trigger_params)
     if not @trigger.save
+      print @trigger.errors.as_json
       render :template =>"/api/v1/trigger/errors.json.jbuilder", :status => 422, :formats => [:json]
       return
     end
     @trigger.reload
+
+    print (@trigger.trigger_type)
 
     @action = current_user.actions.new(action_params)
     @action.action_trigger_id = @trigger.id

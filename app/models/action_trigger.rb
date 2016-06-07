@@ -20,7 +20,7 @@ class ActionTrigger < ActiveRecord::Base
   with_options if: :switch? do |switch|
   end
 
-  with_options if: :switch? do |beacon|
+  with_options if: :beacon? do |beacon|
     beacon.validates :beacon, presence: true
   end
 
