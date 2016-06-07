@@ -10,7 +10,16 @@ class Api::V1::ActionsController < ApplicationController
   end
 
   def create
+    @trigger = ActionTrigger.new(trigger_params)
+    if not @trigger.save
+      render :template =>"/api/v1/trigger/errors.json.jbuilder", :status => 422, :formats => [:json]
+      return
+    end
+    @trigger.reload
+
     @action = current_user.actions.new(action_params)
+    @action.action_trigger_id = @trigger.id
+
     if @action.save
       render :template =>"/api/v1/actions/create.json.jbuilder", :status => 201, :formats => [:json]
     else
@@ -26,5 +35,9 @@ class Api::V1::ActionsController < ApplicationController
   private
     def action_params
       params.permit(:action_subject_id, :action_type)
+    end
+
+    def trigger_params
+      params.require(:trigger).permit(:trigger_type, :weeks, :day_hour, :beacon_id, :start_hour, :finish_hour, :hours, :minutes, week_days: [])
     end
 end
