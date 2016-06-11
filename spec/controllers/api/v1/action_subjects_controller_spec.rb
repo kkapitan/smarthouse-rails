@@ -25,8 +25,8 @@ describe Api::V1::ActionSubjectsController do
   describe "POST #manipulate_simple_subject" do
     context "When request results in success" do
       before(:each) do
-        @action = FactoryGirl.create :action
-        post :manipulate_simple_subject, {:id => @action.id, :state => 1}
+        @action_subject = FactoryGirl.create :action_subject
+        post :manipulate_simple_subject, {:id => @action_subject.id, :state => 1}
       end
 
       it "returns the information about created object" do
