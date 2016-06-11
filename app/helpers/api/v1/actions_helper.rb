@@ -14,9 +14,9 @@ module Api::V1::ActionsHelper
   private
   def add_daily_cron_task(trigger, action)
     time = trigger.minutes + trigger.hours * 60
-    days = trigger.week_days.map{|x| x + 1}.to_s.tr('[]"','').tr(' ', '')
+    days = trigger.week_days.map{|x| x.to_i + 1}.to_s.tr('[]"','').tr(' ', '')
     start = Time.at(trigger.start_hour).hour*60 + Time.at(trigger.start_hour).min
-    endd = Time.at(trigger.finish_hour)*60 + Time.at(trigger.finish_hour).min
+    endd = Time.at(trigger.finish_hour).hour*60 + Time.at(trigger.finish_hour).min
 
     conf = action.action_subject.configuration
     state = Action.states[action.state].to_i

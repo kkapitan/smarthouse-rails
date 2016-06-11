@@ -64,7 +64,7 @@ describe Api::V1::ActionsController do
         @action = FactoryGirl.create :action
 
         @trigger_attributes = FactoryGirl.attributes_for :action_trigger
-        @trigger_attributes[:trigger_type] = 2
+        @trigger_attributes[:trigger_type] = 1
 
         @action_attributes = { action_subject_id: @action.action_subject_id, action_type: "timer", trigger: @trigger_attributes }
         post :create, @action_attributes
