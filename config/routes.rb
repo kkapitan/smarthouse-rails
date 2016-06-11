@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :action_subjects, :only => [:index]
       resources :actions, :only => [:index, :create, :destroy]
 
+      post 'manipulate_simple_subject', to: 'action_subjects#manipulate_simple_subject'
       delete '/sessions/logout', to: 'sessions#destroy'
 
       devise_for :users
