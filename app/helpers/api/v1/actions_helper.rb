@@ -38,7 +38,7 @@ module Api::V1::ActionsHelper
     state = Action.states[action.state].to_i
     as_id = action.action_subject_id
 
-    task = "#{minutes} #{hour} * * #{days} expr `date +\%W` \% #{weeks} > /dev/null || /cronTask #{conf} #{state} #{as_id} #ID=#{action.id}
+    task = "#{minutes} #{hour} * * #{days} expr `date +\%W` \% #{weeks} > /dev/null || /cronTask #{conf} #{state} #{as_id} #ID=#{action.id}"
     system('sudo', '/addCronTask', task)
   end
 
