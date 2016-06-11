@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin, path: '/' do
+    root to: "static_pages#home"
     resources :users
     resources :action_subjects
     resources :beacons
