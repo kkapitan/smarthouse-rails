@@ -25,6 +25,9 @@ class Api::V1::ActionsController < ApplicationController
     @action.action_trigger_id = @trigger.id
 
     if @action.save
+      if @trigger.is_timer_type?
+        add_cron_task(@trigger, @action)
+      end
       render :template =>"/api/v1/actions/create.json.jbuilder", :status => 201, :formats => [:json]
     else
       render :template =>"/api/v1/actions/errors.json.jbuilder", :status => 422, :formats => [:json]
