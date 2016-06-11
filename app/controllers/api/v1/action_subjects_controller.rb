@@ -13,10 +13,11 @@ class Api::V1::ActionSubjectsController < ApplicationController
     pin = @action_subject.configuration
     state = params[:state]
 
-    res = system('python', '/simpleSubject.py', pin, state)
-    if (res == 0)
-      subject.update_attributes state: state
+
+    if (@action_subject.state == state)
     else
+      system('python', '/simpleSubject.py', pin, state)
+      @action_subject.update_attributes state: state
     end
 
     render "api/v1/action_subjects/manipulate_simple_subject_result.json.jbuilder"
