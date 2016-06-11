@@ -11,4 +11,6 @@ class Action < ActiveRecord::Base
 
   enum action_type: [:switch, :timer, :beacon]
 
+  enum state: [:off, :on, :toggled]
+
 end
