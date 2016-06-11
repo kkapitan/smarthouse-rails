@@ -64,10 +64,7 @@ describe Api::V1::ActionsController do
         @action = FactoryGirl.create :action
 
         @trigger_attributes = FactoryGirl.attributes_for :action_trigger
-        @trigger_attributes[:trigger_type] = 3
-
-        @beacon = FactoryGirl.create :beacon, name: "b1"
-        @trigger_attributes[:beacon_id] = @beacon.id
+        @trigger_attributes[:trigger_type] = 2
 
         @action_attributes = { action_subject_id: @action.action_subject_id, trigger: @trigger_attributes }
         post :create, @action_attributes
@@ -75,7 +72,7 @@ describe Api::V1::ActionsController do
 
       it "renders json with information about action trigger" do
         trigger_response = json_response[:action][:trigger]
-        expect(trigger_response[:type]).to eql ActionTrigger.trigger_types["beacon"]
+        expect(trigger_response[:type]).to eql @trigger_attributes[:trigger_type]
       end
 
       it "renders json with information about created action" do
