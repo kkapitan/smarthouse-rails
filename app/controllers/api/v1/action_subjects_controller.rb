@@ -10,7 +10,7 @@ class Api::V1::ActionSubjectsController < ApplicationController
 
     action = Action.find_by(params[:id])
     @action_subject = action.action_subject
-    pin = subject.configuration
+    pin = @action_subject.configuration
     state = params[:state]
 
     res = system('python', '/simpleSubject.py', pin, state)
@@ -19,7 +19,7 @@ class Api::V1::ActionSubjectsController < ApplicationController
     else
     end
 
-    render "api/v1/action_subjects/.json.jbuilder"
+    render "api/v1/action_subjects/manipulate_simple_subject_result.json.jbuilder"
 
   end
 
