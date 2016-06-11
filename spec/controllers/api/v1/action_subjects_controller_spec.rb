@@ -21,4 +21,18 @@ describe Api::V1::ActionSubjectsController do
 
     it { should respond_with 200}
   end
+
+  describe "POST #manipulate_simple_subject" do
+    context "When request results in success" do
+      before(:each) do
+        post :manipulate_simple_subject, {:id => 1, :state => 1}
+      end
+
+      it "returns the information about created object" do
+        print json_response
+      end
+    end
+  end
+
 end
+
