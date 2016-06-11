@@ -21,4 +21,30 @@ describe Api::V1::ActionSubjectsController do
 
     it { should respond_with 200}
   end
+
+  describe "POST #manipulate_simple_subject" do
+    context "When request results in success" do
+      before(:each) do
+        @action_subject = FactoryGirl.create :action_subject
+        post :manipulate_simple_subject, {:id => @action_subject.id, :state => 1}
+      end
+
+      it "returns the information about update object" do
+        expect(json_response[:action_subject][:state][:id]).to eql 1
+      end
+
+      it { should respond_with 200 }
+    end
+
+    context "When action subject has already this state" do
+      before(:each) do
+        @action_subject = FactoryGirl.create :action_subject
+        post :manipulate_simple_subject, {:id => @action_subject.id, :state => ActionSubject.states[@action_subject.state] }
+      end
+
+      it { should respond_with 422 }
+    end
+  end
+
 end
+
