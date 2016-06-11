@@ -1,6 +1,7 @@
 module Api::V1::ActionsHelper
 
   def add_cron_task(trigger, action)
+    print "Robie!"
     if trigger.trigger_type == :daily_timer
       add_daily_cron_task(trigger, action)
     end
@@ -27,6 +28,7 @@ module Api::V1::ActionsHelper
   end
 
   def add_weakly_cron_task(trigger, action)
+    print "Robie KURWA!!!"
     weeks = trigger.weeks
     days = trigger.week_days.to_s.tr('[]','')
     hour = Time.at(trigger.day_hour).hour
