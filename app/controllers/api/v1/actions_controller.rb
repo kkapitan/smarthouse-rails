@@ -32,7 +32,7 @@ class Api::V1::ActionsController < ApplicationController
   end
 
   def destroy
-    current_user.actions.find_by(params[:id]).destroy
+    current_user.actions.find_by(id: params[:id]).destroy
     head 204
   end
 
