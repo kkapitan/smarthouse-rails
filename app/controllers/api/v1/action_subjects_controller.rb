@@ -16,7 +16,7 @@ class Api::V1::ActionSubjectsController < ApplicationController
     if (@action_subject.state == state)
     else
       system('python', '/simpleSubject.py', pin, state)
-      @action_subject.update_attributes state: state
+      @action_subject.update_attributes state: ActionSubject.states.to_a[state.to_i].first
     end
 
     render "api/v1/action_subjects/manipulate_simple_subject_result.json.jbuilder"
