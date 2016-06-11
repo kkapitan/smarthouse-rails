@@ -26,7 +26,6 @@ class Api::V1::ActionsController < ApplicationController
     @action.action_trigger_id = @trigger.id
 
     if @action.save
-      print @action.action_type
       if @action.timer?
         add_cron_task(@trigger, @action)
       end

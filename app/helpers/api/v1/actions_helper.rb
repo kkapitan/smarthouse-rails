@@ -2,12 +2,12 @@ module Api::V1::ActionsHelper
 
   def add_cron_task(trigger, action)
     print "Robie!"
-    if trigger.trigger_type == :daily_timer
+    if trigger.daily_timer?
       add_daily_cron_task(trigger, action)
     end
 
-    if trigger.trigger_type == :weakly_timer
-      add_weakly_cron_task(trigger, actiob)
+    if trigger.weekly_timer?
+      add_weakly_cron_task(trigger, action)
     end
   end
 
@@ -18,7 +18,7 @@ module Api::V1::ActionsHelper
     start = Time.at(trigger.start_hour).hour*60 + Time.at(trigger.start_hour).min
     endd = Time.at(trigger.finish_hour)*60 + Time.at(trigger.finish_hour).min
 
-    conf = action.configuration
+    conf = action.action_subject.configuration
     state = Action.states[action.state].to_i
     as_id = action.action_subject_id
 
@@ -34,7 +34,7 @@ module Api::V1::ActionsHelper
     hour = Time.at(trigger.day_hour).hour
     minutes = Time.at(trigger.day_hour).min
 
-    conf = action.configuration
+    conf = action.action_subject.configuration
     state = Action.states[action.state].to_i
     as_id = action.action_subject_id
 
