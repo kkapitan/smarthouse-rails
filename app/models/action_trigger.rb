@@ -25,9 +25,4 @@ class ActionTrigger < ActiveRecord::Base
   end
 
   belongs_to :beacon
-
-  def is_timer_type?
-    return trigger_type == :daily_timer || trigger_type == :weekly_timer
-  end
-
 end

@@ -1,4 +1,5 @@
 class Api::V1::ActionsController < ApplicationController
+  include Api::V1::ActionsHelper
   before_action :authenticate_with_token!, :only => [:index, :create, :destroy]
 
   def index
@@ -25,7 +26,8 @@ class Api::V1::ActionsController < ApplicationController
     @action.action_trigger_id = @trigger.id
 
     if @action.save
-      if @trigger.is_timer_type?
+      print @action.action_type
+      if @action.timer?
         add_cron_task(@trigger, @action)
       end
       render :template =>"/api/v1/actions/create.json.jbuilder", :status => 201, :formats => [:json]
