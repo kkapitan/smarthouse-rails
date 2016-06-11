@@ -14,7 +14,7 @@ module Api::V1::ActionsHelper
   private
   def add_daily_cron_task(trigger, action)
     time = trigger.minutes + trigger.hours * 60
-    days = trigger.week_days.to_s.tr('[]','')
+    days = trigger.week_days.map{|x| x + 1}.to_s.tr('[]"','').tr(' ', '')
     start = Time.at(trigger.start_hour).hour*60 + Time.at(trigger.start_hour).min
     endd = Time.at(trigger.finish_hour)*60 + Time.at(trigger.finish_hour).min
 
@@ -30,7 +30,7 @@ module Api::V1::ActionsHelper
   def add_weakly_cron_task(trigger, action)
     print "Robie KURWA!!!"
     weeks = trigger.weeks
-    days = trigger.week_days.to_s.tr('[]"','').tr(' ', '')
+    days = trigger.week_days.map{|x| x.to_i + 1}.to_s.tr('[]"','').tr(' ', '')
     hour = Time.at(trigger.day_hour).hour
     minutes = Time.at(trigger.day_hour).min
 
