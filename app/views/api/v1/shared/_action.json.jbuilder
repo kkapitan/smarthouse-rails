@@ -5,6 +5,13 @@ json.action_type do
   json.name action.action_type
 end
 
+if action.state.present?
+  json.state do
+    json.id ActionSubject.states[action.state]
+    json.name action.state
+  end
+end
+
 json.action_subject do
   json.partial! '/api/v1/shared/action_subject', subject: action.action_subject
 end

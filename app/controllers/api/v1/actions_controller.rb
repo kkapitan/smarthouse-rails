@@ -21,8 +21,6 @@ class Api::V1::ActionsController < ApplicationController
     end
     @trigger.reload
 
-    print (@trigger.trigger_type)
-
     @action = current_user.actions.new(action_params)
     @action.action_trigger_id = @trigger.id
 
@@ -40,7 +38,7 @@ class Api::V1::ActionsController < ApplicationController
 
   private
     def action_params
-      params.permit(:action_subject_id, :action_type)
+      params.permit(:action_subject_id, :action_type, :state)
     end
 
     def trigger_params
