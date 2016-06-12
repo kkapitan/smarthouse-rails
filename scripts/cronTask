@@ -1,0 +1,21 @@
+cd /home/pi/smarthouse-rails
+echo "robie, mam params $1 $2 $3" >> /home/pi/cronTask.log
+if [ $2 -eq 2 ] ; then
+	echo "Jestem w if" >> /home/pi/cronTask.log
+	curr=`/usr/local/bin/rake getSubjectState[$3] 2> /home/pi/crash.log`
+	echo "Mam stan: $curr" >> /home/pi/cronTask.log
+	if [ $curr = "on" ] ; then
+		echo "Przestawiam na off" >> /home/pi/cronTask.log
+        	python /simpleSubject.py $1 0
+        	/usr/local/bin/rake setSubjectState[$3,0]
+	fi
+        if [ $curr = "off" ] ; then
+		echo "Przestawiam na on" >> /home/pi/cronTask.log      
+                python /simpleSubject.py $1 1
+                /usr/local/bin/rake setSubjectState[$3,1]
+        fi
+else
+	echo "Jestem w else" >> /home/pi/cronTask.log
+	python /simpleSubject.py $1 $2
+	/usr/local/bin/rake setSubjectState[$3,$2]
+fi
