@@ -8,7 +8,7 @@ class Api::V1::ActionSubjectsController < ApplicationController
 
   def manipulate_simple_subject
 
-    @action_subject = ActionSubject.find_by(params[:id])
+    @action_subject = ActionSubject.find_by(id: params[:id])
     pin = @action_subject.configuration.present? ? @action_subject.configuration : ""
 
     state = params[:state]

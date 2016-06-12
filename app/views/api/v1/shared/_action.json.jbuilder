@@ -7,7 +7,7 @@ end
 
 if action.state.present?
   json.state do
-    json.id ActionSubject.states[action.state]
+    json.id Action.states[action.state]
     json.name action.state
   end
 end

@@ -15,8 +15,8 @@ module Api::V1::ActionsHelper
   def add_daily_cron_task(trigger, action)
     time = trigger.minutes + trigger.hours * 60
     days = trigger.week_days.map{|x| x.to_i + 1}.to_s.tr('[]"','').tr(' ', '')
-    start = Time.at(trigger.start_hour).hour*60 + Time.at(trigger.start_hour).min
-    endd = Time.at(trigger.finish_hour).hour*60 + Time.at(trigger.finish_hour).min
+    start = Time.at(trigger.start_hour).hour*60 + Time.at(trigger.start_hour).min + 180
+    endd = Time.at(trigger.finish_hour).hour*60 + Time.at(trigger.finish_hour).min + 180
 
     conf = action.action_subject.configuration
     state = Action.states[action.state].to_i
@@ -31,8 +31,8 @@ module Api::V1::ActionsHelper
     print "Robie KURWA!!!"
     weeks = trigger.weeks
     days = trigger.week_days.map{|x| x.to_i + 1}.to_s.tr('[]"','').tr(' ', '')
-    hour = Time.at(trigger.day_hour).hour
-    minutes = Time.at(trigger.day_hour).min
+    hour = Time.at(trigger.day_hour).hour + 180
+    minutes = Time.at(trigger.day_hour).min + 180
 
     conf = action.action_subject.configuration
     state = Action.states[action.state].to_i
